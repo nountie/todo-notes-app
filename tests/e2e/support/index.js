@@ -16,5 +16,12 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+import { worker } from '../../../src/mocks/browser'
+
+Cypress.on('test:before:run:async', async () => {
+  // if MSW wasnt started by the app, Cypress needs to start it
+  await worker.start()
+})
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

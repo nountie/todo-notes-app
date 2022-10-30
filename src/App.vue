@@ -1,28 +1,50 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <StatsBox :data="todos" />
+    <TodoTable :todos="todos" />
+    <PortalTarget name="modals" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import StatsBox from './components/StatsBox.vue'
+import TodoTable from './components/TodoTable.vue'
+import { mapState } from 'vuex'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    StatsBox,
+    TodoTable
+  },
+  computed: {
+    ...mapState(['todos'])
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    background: #f7f7f7;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .container {
+    max-width: 992px;
+    margin: 50px auto;
+  }
+
+  /* Animations */
+  .fade-enter-active, .fade-leave-active {
+    transition: transform .5s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    transform: translateY(100%);
+  }
 </style>
